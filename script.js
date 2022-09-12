@@ -1,3 +1,10 @@
+const rock = document.getElementById('rock');
+const buttons = document.getElementsByTagName('button');
+
+for( let i = 0 ; i < buttons.length ; i++ ) {
+    buttons[i].addEventListener("click", e => console.log(game(e.target.textContent)));
+};
+
 function getComputerChoice() {
     num = Math.floor(Math.random() * (3 - 0)) + 0; // random number between 0 and 3 (excluded)
     switch (num) {
@@ -18,7 +25,7 @@ function getComputerChoice() {
     return null;
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection = 'scissors', computerSelection = getComputerChoice()) {
 
     if (playerSelection == computerSelection) {
         return -1; //tie
@@ -56,10 +63,9 @@ function validateInput(choice) {
     return null;
 }
 
-function game() {
+function game(playerSelection) {
     let result = 0;
-    let playerWins = 0;
-    let playerSelection = validateInput(prompt('Rock, paper or scissors?').toLowerCase());
+    playerSelection = validateInput(playerSelection.toLowerCase());
     let computerSelection = validateInput(getComputerChoice().toLowerCase());
     if (playerSelection && computerSelection) {
         result = playRound(playerSelection, computerSelection);
@@ -78,5 +84,4 @@ function game() {
         console.log(`Invalid input! Player input: ${playerSelection}. Computer input: ${computerSelection}`);
     }
 
-    console.log(`You had ${playerWins} out of 5 wins`);
 }
