@@ -12,7 +12,7 @@ for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", e => {
         result.innerHTML = "";
         const p = document.createElement("p");
-        p.textContent = `${game(e.target.textContent)}\n
+        p.textContent = `${game(e.target.id)}\n
         Player wins: ${playerWins}\n
         Computer wins: ${computerWins}`;
         result.appendChild(p);
