@@ -1,0 +1,36 @@
+html {
+	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body {
+	min-height: 100vh;
+background: #131516;
+	color: #d8d4cf;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+button {
+	background: #454a4d;
+}
+
+.options-container {
+	text-align: center;
+}
+
+#result {
+	text-align: center;
+}
+
+.game-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
