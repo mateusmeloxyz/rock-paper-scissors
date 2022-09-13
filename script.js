@@ -1,8 +1,12 @@
-const rock = document.getElementById('rock');
 const buttons = document.getElementsByTagName('button');
+const result = document.getElementById("result");
 
-for( let i = 0 ; i < buttons.length ; i++ ) {
-    buttons[i].addEventListener("click", e => console.log(game(e.target.textContent)));
+for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", e => {
+        const p = document.createElement("p");
+        p.textContent = game(e.target.textContent);
+        result.appendChild(p);
+    });
 };
 
 function getComputerChoice() {
@@ -70,18 +74,15 @@ function game(playerSelection) {
     if (playerSelection && computerSelection) {
         result = playRound(playerSelection, computerSelection);
         if (result === 1) {
-            console.log(`You Win! ${playerSelection} beats ${computerSelection}`);
-            playerWins++;
+            return `You Win! ${playerSelection} beats ${computerSelection}`;
         } else if (result === 0) {
-            console.log(`You Lose! ${computerSelection} beats ${playerSelection}`);
+            return `You Lose! ${computerSelection} beats ${playerSelection}`;
         } else if (result === -1) {
-            console.log(`Tie! ${playerSelection} is equal to ${computerSelection}`);
+            return `Tie! ${playerSelection} is equal to ${computerSelection}`;
         } else {
-            console.log(`Something very, very bad happened... Player input: ${playerSelection}. Computer input: ${computerSelection}`);
+            return `Something very, very bad happened... Player input: ${playerSelection}. Computer input: ${computerSelection}`;
         }
     }
-    else {
-        console.log(`Invalid input! Player input: ${playerSelection}. Computer input: ${computerSelection}`);
-    }
 
+    return `Invalid input! Player input: ${playerSelection}. Computer input: ${computerSelection}`;
 }
