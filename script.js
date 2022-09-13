@@ -1,10 +1,20 @@
+let playerWins = 0;
+let computerWins = 0;
+
 const buttons = document.getElementsByTagName('button');
 const result = document.getElementById("result");
 
+const p = document.createElement("p");
+p.textContent = "First to reach 5 wins the game";
+result.appendChild(p);
+
 for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", e => {
+        result.innerHTML = "";
         const p = document.createElement("p");
-        p.textContent = game(e.target.textContent);
+        p.textContent = `${game(e.target.textContent)}\n
+        Player wins: ${playerWins}\n
+        Computer wins: ${computerWins}`;
         result.appendChild(p);
     });
 };
@@ -71,11 +81,22 @@ function game(playerSelection) {
     let result = 0;
     playerSelection = validateInput(playerSelection.toLowerCase());
     let computerSelection = validateInput(getComputerChoice().toLowerCase());
+
+    if (playerWins >= 5) {
+        return `Player won!`;
+    }
+
+    if (computerWins >= 5) {
+        return `Computer won!`;
+    }
+
     if (playerSelection && computerSelection) {
         result = playRound(playerSelection, computerSelection);
         if (result === 1) {
+            playerWins++;
             return `You Win! ${playerSelection} beats ${computerSelection}`;
         } else if (result === 0) {
+            computerWins++;
             return `You Lose! ${computerSelection} beats ${playerSelection}`;
         } else if (result === -1) {
             return `Tie! ${playerSelection} is equal to ${computerSelection}`;
