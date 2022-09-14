@@ -18,10 +18,15 @@ background: #131516;
 
 button {
 	background: #454a4d;
+	padding: 8px;
 }
 
 .options-container {
 	text-align: center;
+}
+
+.options-container button {
+	font-size: 48px;
 }
 
 #result {
