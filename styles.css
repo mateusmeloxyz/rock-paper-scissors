@@ -22,11 +22,14 @@ button {
 }
 
 .options-container {
+	display: flex;
+	justify-content: space-between;
+	gap: 32px;
 	text-align: center;
 }
 
 .options-container button {
-	font-size: 48px;
+	font-size: 52px;
 }
 
 #result {
@@ -50,14 +53,20 @@ button {
 .result-container div {
 	border: 4px #333 solid;
 	border-radius: 8px;
-	font-size: 36px;
-	padding: 24px;
+	text-align: center;
+	padding: 8px;
+	font-size: 32px;
 }
 
-.result-container #player-choice {
+.result-container .win {
 	border-color: greenyellow;
 }
 
-.result-container #computer-choice {
+.result-container .lose {
 	border-color: red;
+}
+
+#player-box,
+#computer-box {
+	font-size: 64px;
 }

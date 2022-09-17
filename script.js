@@ -8,16 +8,35 @@ const p = document.createElement("p");
 p.textContent = "First to reach 5 wins the game";
 result.appendChild(p);
 
+const playerBox = document.getElementById("player-box");
+const computerBox = document.getElementById("computer-box");
+
+const playerCount = document.getElementById("player-count");
+const computerCount = document.getElementById("computer-count");
+
 for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", e => {
         result.innerHTML = "";
         const p = document.createElement("p");
-        p.textContent = `${game(e.target.id)}\n
-        Player wins: ${playerWins}\n
-        Computer wins: ${computerWins}`;
+        p.textContent = `${game(e.target)}\n`;
         result.appendChild(p);
+        playerCount.textContent = playerWins;
+        computerCount.textContent = computerWins;
+        if( !(playerWins >= 5 || computerWins >= 5) ){
+            playerBox.textContent = e.target.textContent;
+        }
     });
 };
+
+function wordToEmoji(word){
+    const dictionary = {
+        "rock": "✊",
+        "paper": "✋",
+        "scissors": "✌️"
+    }
+
+    return dictionary[word];
+}
 
 function getComputerChoice() {
     num = Math.floor(Math.random() * (3 - 0)) + 0; // random number between 0 and 3 (excluded)
@@ -77,9 +96,9 @@ function validateInput(choice) {
     return null;
 }
 
-function game(playerSelection) {
+function game(playerElm) {
     let result = 0;
-    playerSelection = validateInput(playerSelection.toLowerCase());
+    playerSelection = validateInput(playerElm.id.toLowerCase());
     let computerSelection = validateInput(getComputerChoice().toLowerCase());
 
     if (playerWins >= 5) {
@@ -90,16 +109,27 @@ function game(playerSelection) {
         return `Computer won!`;
     }
 
+    playerBox.textContent = playerElm.textContent;
+    computerBox.textContent = wordToEmoji(computerSelection);
+    playerBox.classList.remove('lose', 'win');
+    computerBox.classList.remove('lose', 'win');
+    
     if (playerSelection && computerSelection) {
         result = playRound(playerSelection, computerSelection);
         if (result === 1) {
             playerWins++;
-            return `You Win! ${playerSelection} beats ${computerSelection}`;
+            playerBox.classList.add('win');
+            computerBox.classList.add('lose');
+            return 'You win!';
         } else if (result === 0) {
+            playerBox.classList.add('lose');
+            computerBox.classList.add('win');
             computerWins++;
-            return `You Lose! ${computerSelection} beats ${playerSelection}`;
+            return 'You Lose!';
         } else if (result === -1) {
-            return `Tie! ${playerSelection} is equal to ${computerSelection}`;
+            playerBox.classList.add('tie');
+            computerBox.classList.add('tie');
+            return 'Tie!';
         } else {
             return `Something very, very bad happened... Player input: ${playerSelection}. Computer input: ${computerSelection}`;
         }
