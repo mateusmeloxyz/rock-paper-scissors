@@ -39,3 +39,25 @@ button {
 	justify-content: center;
 	flex-direction: column;
 }
+
+.result-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 64px;
+}
+
+.result-container div {
+	border: 4px #333 solid;
+	border-radius: 8px;
+	font-size: 36px;
+	padding: 24px;
+}
+
+.result-container #player-choice {
+	border-color: greenyellow;
+}
+
+.result-container #computer-choice {
+	border-color: red;
+}
